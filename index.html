@@ -17,11 +17,14 @@ function ajax_post(){
     hr.onreadystatechange = function() {
 	    if(hr.readyState == 4 && hr.status == 200) {
 		    var return_data = hr.responseText;
-          result = JSON.parse(result);
+          var result = [];
+          console.log(result);
+            var result2 = [];
+          result2 = JSON.parse(result);
 
 
         var phpdata = [];
-        phpdata = return_data.split(separator);
+        phpdata = return_data.split(',');
         console.log(phpdata);
         console.log("***endphpdata*****");
         var dlzka = Math.floor(phpdata.length/3)-1;
