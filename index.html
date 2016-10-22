@@ -22,9 +22,6 @@ function ajax_post(){
         var vT = phpdata[0];
         var xT = phpdata[1];
         var yT = phpdata[2];
-        
-
-
 
 
 			document.getElementById("status").innerHTML = return_data;
@@ -33,6 +30,22 @@ function ajax_post(){
     // Send the data to PHP now... and wait for response to update the status div
     hr.send(vars); // Actually execute the request
     document.getElementById("status").innerHTML = "processing...";
+
+
+    var table = '';
+    var rows = 4;
+    var cols = 3;
+    for (var r = 0; r < rows; r++){
+      table += '<tr>';
+      for(var c = 1;c <= cols; c++){
+        table += '<td>' + c + '</td>';
+      }
+      table += '</tr>';
+    }
+    document.write('<table border=1>'+ table + '</table>');
+
+
+
 }
 //------------------------------------------------------------------------------------------------------
 </script>
@@ -43,5 +56,6 @@ Velocity: <input id="Velocity" name="Velocity" type="text">  <br><br>
 Angle: <input id="Angle" name="Angle" type="text"> <br><br>
 <input name="myBtn" type="submit" value="Submit Data" onclick="ajax_post();"> <br><br>
 <div id="status"></div>
+<div id="Table"></div>
 </body>
 </html>
