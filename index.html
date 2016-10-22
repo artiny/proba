@@ -23,28 +23,32 @@ function ajax_post(){
         var xT = phpdata[1];
         var yT = phpdata[2];
 
+// CREATE TABLE------------------------------------
+function createTable(tableData) {
+  var table = document.createElement('table');
+  var tableBody = document.createElement('tbody');
+ tableData.forEach(function(rowData) {
+   var row = document.createElement('tr');
+   rowData.forEach(function(cellData) {
+    var cell = document.createElement('td');
+    cell.appendChild(document.createTextNode(cellData));
+    row.appendChild(cell);
+   });
+   tableBody.appendChild(row);
+ });
+ table.appendChild(tableBody);
+ document.body.appendChild(table);
+}
+// CREATE TABLE------------------------------------
+
 
 			document.getElementById("status").innerHTML = return_data;
+      document.getElementById("T").innerHTML = createTable([vT],[xT]);
 	    }
     }
     // Send the data to PHP now... and wait for response to update the status div
     hr.send(vars); // Actually execute the request
     document.getElementById("status").innerHTML = "processing...";
-
-
-    var table = '';
-    var rows = 4;
-    var cols = 3;
-    for (var r = 0; r < rows; r++){
-      table += '<tr>';
-      for(var c = 1;c <= cols; c++){
-        table += '<td>' + c + '</td>';
-      }
-      table += '</tr>';
-    }
-    document.write('<table border=1>'+ table + '</table>');
-
-
 
 }
 //------------------------------------------------------------------------------------------------------
@@ -56,6 +60,8 @@ Velocity: <input id="Velocity" name="Velocity" type="text">  <br><br>
 Angle: <input id="Angle" name="Angle" type="text"> <br><br>
 <input name="myBtn" type="submit" value="Submit Data" onclick="ajax_post();"> <br><br>
 <div id="status"></div>
-<div id="Table"></div>
+<div id="T"></div>
+
+
 </body>
 </html>
