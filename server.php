@@ -48,28 +48,7 @@ while($ii<count($data)){
 }
 
 
-
 //--------------------------------------------------
-//echo 'Thank you '. $_POST['Velocity'] . ' ' . $_POST['Angle'] . ', says the PHP file';
-//echo print_r($datat);
-//echo '<pre>'; print_r($datat); echo '</pre>';
-//echo '<pre>'; print_r($datax); echo '</pre>';
-//echo '<pre>'; print_r($datay); echo '</pre>';
-
-/*
-//$php_array = array('abc','def','ghi');
-$js_arrayt = json_encode($datat);
-//echo "var javascript_array = ". $js_array . ";\n";
-echo $js_arrayt;
-
-$js_arrayx = json_encode($datax);
-//echo "var javascript_array = ". $js_array . ";\n";
-echo $js_arrayx;
-
-$js_arrayy = json_encode($datay);
-//echo "var javascript_array = ". $js_array . ";\n";
-echo $js_arrayy;
-*/
 
 $result = array($datat,$datax,$datay);
 $result = json_encode($result);
