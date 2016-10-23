@@ -52,40 +52,73 @@ var data = {
                      suggestedMin: 0,    // minimum will be 0, unless there is a lower value.
                  }
              }]
-         }
+         },
+
       };
 
     var ctx = document.getElementById('myChart').getContext('2d');
     var myNewChart = new Chart(ctx).Line(data,option);
 
+Chart.defaults.global.animation
+
+
+
 var indexEnd = xT.length;
 
-//*****************************************************************
-var vT = '<table border="1"><tr>';
-for( i=0;i<phpdata[0].length;i++ )
-{ vT += '<td>'+phpdata[0][i]+'<\/td>'; }
-vT += '<\/tr><tr>';
-for( i=0;i<phpdata[1].length;i++ )
-{ vT += '<td>'+phpdata[1][i]+'<\/td>'; }
-vT += '<\/tr><tr>';
-for( i=0;i<phpdata[2].length;i++ )
-{ vT += '<td>'+phpdata[2][i]+'<\/td>'; }
-vT += '<\/tr><\/table>';
-//99999999999999999999999999999999999999999999999999999999999999
+
 
 
 
 			//document.getElementById("status").innerHTML = return_data;
       document.getElementById("header").innerHTML = "cas  \u00A0 \u00A0 \u00A0 \u00A0  poz x  \u00A0 \u00A0 \u00A0 \u00A0   \u00A0 \u00A0 \u00A0 \u00A0        poz  y ";
-      //**********************************************************************************************************itt iratom ki a tomboket
-     document.getElementById("zobrazT").innerHTML = vT;
-     document.getElementById("zobrazX").innerHTML = xT;
-      document.getElementById("zobrazY").innerHTML = yT;
+
+  //**********************************************************************************************************itt iratom ki a tomboket
+  //*****************************************************************
+/*
+  var vT = '<table border="1"><tr>';
+  for( i=0;i<phpdata[0].length;i++ )
+  { vT += '<td>'+phpdata[0][i]+'<\/td>'; }
+  vT += '<\/tr><tr>';
+  for( i=0;i<phpdata[1].length;i++ )
+  { vT += '<td>'+phpdata[1][i]+'<\/td>'; }
+  vT += '<\/tr><tr>';
+  for( i=0;i<phpdata[2].length;i++ )
+  { vT += '<td>'+phpdata[2][i]+'<\/td>'; }
+  vT += '<\/tr><\/table>';
+
+*/
+var energy = phpdata.join();
+
+console.log(energy);
+
+
+var akt = 0;
+var sor = phpdata[0].length;
+var oszlop = phpdata.length;
+var vT = '<table border="1"><tr><th>cas<\/th><th>pos x<\/th><th>pos y<\/th><\/tr>';
+for( i=0;i<sor;i++ ) // i sor
+{
+vT += '<tr>';
+for( k=0;k<oszlop;k++ ) // k oszlop
+{
+    vT += '<td>'+phpdata[k][i]+'<\/td>';
+}
+vT += '<\/tr>';
+}
+vT += '<\/tr><\/table>';
+
+
+  //99999999999999999999999999999999999999999999999999999999999999
+
+
+    document.getElementById("zobrazT").innerHTML = vT;
+    document.getElementById("zobrazX").innerHTML = xT;
+    document.getElementById("zobrazY").innerHTML = yT;
 
 
 
       for(var indexP = 0 ; indexP <= indexEnd; indexP+=2){
-      myNewChart.datasets[0].points[indexP].fillColor=  "lightgreen";
+      myNewChart.datasets[0].points[indexP].fillColor=  "#0000FF";
       //myNewChart.update();
 
       }
