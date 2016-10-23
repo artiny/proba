@@ -1,6 +1,5 @@
 <html>
 <head>
-
 <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/1.0.2/Chart.min.js"></script>
 
@@ -44,6 +43,8 @@ var data = {
 	    ]
 	};
       var option = {
+
+      //animationSteps: 60
       scales: {
              yAxes: [{
                  display: true,
@@ -54,24 +55,41 @@ var data = {
          }
       };
 
-
-
-
     var ctx = document.getElementById('myChart').getContext('2d');
     var myNewChart = new Chart(ctx).Line(data,option);
 
-
-
-
+var indexEnd = xT.length;
 
 //*****************************************************************
+var vT = '<table border="1"><tr>';
+for( i=0;i<phpdata[0].length;i++ )
+{ vT += '<td>'+phpdata[0][i]+'<\/td>'; }
+vT += '<\/tr><tr>';
+for( i=0;i<phpdata[1].length;i++ )
+{ vT += '<td>'+phpdata[1][i]+'<\/td>'; }
+vT += '<\/tr><tr>';
+for( i=0;i<phpdata[2].length;i++ )
+{ vT += '<td>'+phpdata[2][i]+'<\/td>'; }
+vT += '<\/tr><\/table>';
+//99999999999999999999999999999999999999999999999999999999999999
+
+
 
 			//document.getElementById("status").innerHTML = return_data;
       document.getElementById("header").innerHTML = "cas  \u00A0 \u00A0 \u00A0 \u00A0  poz x  \u00A0 \u00A0 \u00A0 \u00A0   \u00A0 \u00A0 \u00A0 \u00A0        poz  y ";
       //**********************************************************************************************************itt iratom ki a tomboket
-      document.getElementById("zobrazT").innerHTML = vT;
-      document.getElementById("zobrazX").innerHTML = xT;
+     document.getElementById("zobrazT").innerHTML = vT;
+     document.getElementById("zobrazX").innerHTML = xT;
       document.getElementById("zobrazY").innerHTML = yT;
+
+
+
+      for(var indexP = 0 ; indexP <= indexEnd; indexP+=2){
+      myNewChart.datasets[0].points[indexP].fillColor=  "lightgreen";
+      //myNewChart.update();
+
+      }
+
   //    document.getElementById("myChart").innerHTML = ;
     //  document.getElementById("zobrazY").innerHTML = yT.join('<br/>');
 	    }
@@ -95,6 +113,7 @@ Angle: <input id="Angle" name="Angle" type="text"> <br><br>
 <div id="zobrazX"></div>
 <div id="zobrazY"></div>
 <canvas id="myChart" height="400" width="1000"></canvas>
+<canvas id="myAnim" height="400" width="1000"></canvas>
 
 
 </body>
