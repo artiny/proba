@@ -29,7 +29,6 @@ function ajax_post(){
 
 //*****************************************************************
 var data = {
-	  //  labels: ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"],
     labels: xT,
 	    datasets: [
 	        {
@@ -44,29 +43,16 @@ var data = {
           }
 	    ]
 	};
-var option = {
-  /*
-  scales:{
-    xAxes:[{
-      stacked:false
-    }]
-  }
-*/
-
-legend: {
-          display: false
-       },
-
-scales: {
-       yAxes: [{
-           display: true,
-           ticks: {
-               suggestedMin: 0,    // minimum will be 0, unless there is a lower value.
-           }
-       }]
-   }
-
-};
+      var option = {
+      scales: {
+             yAxes: [{
+                 display: true,
+                 ticks: {
+                     suggestedMin: 0,    // minimum will be 0, unless there is a lower value.
+                 }
+             }]
+         }
+      };
 
 
 
@@ -79,12 +65,8 @@ scales: {
 
 
 //*****************************************************************
-  //   function createGraf(){
-//     }
 
-
-
-			document.getElementById("status").innerHTML = return_data;
+			//document.getElementById("status").innerHTML = return_data;
       document.getElementById("header").innerHTML = "cas  \u00A0 \u00A0 \u00A0 \u00A0  poz x  \u00A0 \u00A0 \u00A0 \u00A0   \u00A0 \u00A0 \u00A0 \u00A0        poz  y ";
       //**********************************************************************************************************itt iratom ki a tomboket
       document.getElementById("zobrazT").innerHTML = vT;
@@ -96,7 +78,7 @@ scales: {
     }
     // Send the data to PHP now... and wait for response to update the status div
     hr.send(vars); // Actually execute the request
-    document.getElementById("status").innerHTML = "processing...";
+  //  document.getElementById("status").innerHTML = "processing...";
 
 }
 //------------------------------------------------------------------------------------------------------
