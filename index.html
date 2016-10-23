@@ -1,5 +1,9 @@
 <html>
 <head>
+
+<script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/1.0.2/Chart.min.js"></script>
+
 <script>
 //------------------------------------------------------------------------------------------------------
 function ajax_post(){
@@ -23,6 +27,61 @@ function ajax_post(){
         var xT = phpdata[1];
         var yT = phpdata[2];
 
+//*****************************************************************
+var data = {
+	  //  labels: ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"],
+    labels: xT,
+	    datasets: [
+	        {
+	          //  label: "The First Dataset",
+	            fillColor: "rgba(153,0,76,0.2)", // magenta
+	            strokeColor: "rgba(153,0,76,1)", // magenta
+	            pointColor: "rgba(153,0,76,1)", // magenta
+	            pointStrokeColor: "#fff", // white
+	            pointHighlightFill: "#fff", // white
+	            pointHighlightStroke: "rgba(153,0,76,1)", // magenta
+              data: yT
+          }
+	    ]
+	};
+var option = {
+  /*
+  scales:{
+    xAxes:[{
+      stacked:false
+    }]
+  }
+*/
+
+legend: {
+          display: false
+       },
+
+scales: {
+       yAxes: [{
+           display: true,
+           ticks: {
+               suggestedMin: 0,    // minimum will be 0, unless there is a lower value.
+           }
+       }]
+   }
+
+};
+
+
+
+
+    var ctx = document.getElementById('myChart').getContext('2d');
+    var myNewChart = new Chart(ctx).Line(data,option);
+
+
+
+
+
+//*****************************************************************
+  //   function createGraf(){
+//     }
+
 
 
 			document.getElementById("status").innerHTML = return_data;
@@ -31,6 +90,7 @@ function ajax_post(){
       document.getElementById("zobrazT").innerHTML = vT;
       document.getElementById("zobrazX").innerHTML = xT;
       document.getElementById("zobrazY").innerHTML = yT;
+  //    document.getElementById("myChart").innerHTML = ;
     //  document.getElementById("zobrazY").innerHTML = yT.join('<br/>');
 	    }
     }
@@ -52,6 +112,7 @@ Angle: <input id="Angle" name="Angle" type="text"> <br><br>
 <div id="zobrazT"></div>
 <div id="zobrazX"></div>
 <div id="zobrazY"></div>
+<canvas id="myChart" height="400" width="1000"></canvas>
 
 
 </body>
