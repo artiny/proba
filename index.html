@@ -3,13 +3,13 @@
 #myContainer {
   width: 400px;
   height: 400px;
-  position: relative;;
-  background: yellow;
+  position: absolute;
+  background: white;
 }
 #myAnimation {
   width: 50px;
   height: 50px;
-  position: absolute;;
+  position: relative;;
   background-color: red;
 }
 </style>
@@ -87,7 +87,7 @@ var indexEnd = xT.length;
 
 
 			//document.getElementById("status").innerHTML = return_data;
-      document.getElementById("header").innerHTML = "cas  \u00A0 \u00A0 \u00A0 \u00A0  poz x  \u00A0 \u00A0 \u00A0 \u00A0   \u00A0 \u00A0 \u00A0 \u00A0        poz  y ";
+    //  document.getElementById("header").innerHTML = "cas  \u00A0 \u00A0 \u00A0 \u00A0  poz x  \u00A0 \u00A0 \u00A0 \u00A0   \u00A0 \u00A0 \u00A0 \u00A0        poz  y ";
 
   //**********************************************************************************************************itt iratom ki a tomboket
   //*****************************************************************
@@ -198,15 +198,17 @@ Angle: <input id="Angle" name="Angle" type="text"> <br><br>
 <div id="status"></div>
 <div id="header"></div>
 
-<div id ="myContainer">
-<div id ="myAnimation"></div>
+
+
+
+
 
 <div id="zobrazT"></div>
 <div id="zobrazX"></div>
 <div id="zobrazY"></div>
 <canvas id="myChart" height="400" width="1000"></canvas>
-<canvas id="myAnim" height="400" width="1000"></canvas>
-
+<div id ="myContainer"></div>
+<div id ="myAnimation"></div>
 
 
 
