@@ -1,4 +1,19 @@
 <html>
+<style>
+#myContainer {
+  width: 400px;
+  height: 400px;
+  position: relative;;
+  background: yellow;
+}
+#myAnimation {
+  width: 50px;
+  height: 50px;
+  position: absolute;;
+  background-color: red;
+}
+</style>
+
 <head>
 <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/1.0.2/Chart.min.js"></script>
@@ -25,8 +40,10 @@ function ajax_post(){
         var vT = phpdata[0];
         var xT = phpdata[1];
         var yT = phpdata[2];
+      console.log(xT);
+        console.log("***********************************");
 
-//*****************************************************************
+//***************************************************************** graf
 var data = {
     labels: xT,
 	    datasets: [
@@ -87,10 +104,44 @@ var indexEnd = xT.length;
   vT += '<\/tr><\/table>';
 
 */
+
+
+
+
+
+//------------------------------------------animacio start
+function myMove(params1, params2) {
+//  function myMove() {
+  var elem = document.getElementById("myAnimation");
+  var pos = 0;
+  var i = 0;
+  var temp = Math.max.apply(null,params2);
+  console.log(temp);
+console.log("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa");
+  var id = setInterval(frame, 20);
+  function frame() {
+
+    if (pos == 350) {
+          clearInterval(id);
+      console.log("bbbbbbb");
+    } else {
+
+      pos++;
+      i++;
+      elem.style.top = (temp-params2[i]) + 'px';
+        console.log(xT[i]);
+      elem.style.left = params1[i] + 'px';
+          console.log("ccccccc");
+    }
+  }
+}
+
+
+//------------------------------------------animacio end
+
+
+/////////**********************************
 var energy = phpdata.join();
-
-
-
 
 var akt = 0;
 var sor = phpdata[0].length;
@@ -111,7 +162,10 @@ vT += '<\/tr><\/table>';
   //99999999999999999999999999999999999999999999999999999999999999
 
 
+  document.getElementById("myAnimation").innerHTML = myMove(xT,yT);
+
     document.getElementById("zobrazT").innerHTML = vT;
+
   //  document.getElementById("zobrazX").innerHTML = xT;
  //    document.getElementById("zobrazY").innerHTML = yT;
 
@@ -140,13 +194,20 @@ vT += '<\/tr><\/table>';
 Velocity: <input id="Velocity" name="Velocity" type="text">  <br><br>
 Angle: <input id="Angle" name="Angle" type="text"> <br><br>
 <input name="myBtn" type="submit" value="Submit Data" onclick="ajax_post();"> <br><br>
+
 <div id="status"></div>
 <div id="header"></div>
+
+<div id ="myContainer">
+<div id ="myAnimation"></div>
+
 <div id="zobrazT"></div>
 <div id="zobrazX"></div>
 <div id="zobrazY"></div>
 <canvas id="myChart" height="400" width="1000"></canvas>
 <canvas id="myAnim" height="400" width="1000"></canvas>
+
+
 
 
 </body>
