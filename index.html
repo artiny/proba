@@ -1,25 +1,27 @@
 <html>
+<!-- create style for Animation myContainer,myAnimation -->
 <style>
-#myContainer {
-  width: 400px;
-  height: 400px;
-  position: absolute;
-  background: white;
-}
-#myAnimation {
-  width: 50px;
-  height: 50px;
-  position: relative;;
-  background-color: red;
-}
+      #myContainer {
+        width: 400;
+        height: 400;
+        position: absolute;
+        background: white;
+      }
+      #myAnimation {
+        width: 50px;
+        height: 50px;
+        position: relative;;
+        background-color: red;
+      }
 </style>
 
 <head>
+<!-- create sript for Graf  load: jquery, char.js library -->
 <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/1.0.2/Chart.min.js"></script>
 
 <script>
-//------------------------------------------------------------------------------------------------------
+// ajax_post function for get data from server
 function ajax_post(){
     // Create our XMLHttpRequest object
     var hr = new XMLHttpRequest();
@@ -36,19 +38,15 @@ function ajax_post(){
 	    if(hr.readyState == 4 && hr.status == 200) {
 		    var return_data = hr.responseText;
         phpdata = JSON.parse(return_data);
-        console.log(phpdata);
         var vT = phpdata[0];
         var xT = phpdata[1];
         var yT = phpdata[2];
-      console.log(xT);
-        console.log("***********************************");
 
-//***************************************************************** graf
+//  crete char.js graf   ---- start
 var data = {
     labels: xT,
 	    datasets: [
 	        {
-	          //  label: "The First Dataset",
 	            fillColor: "rgba(153,0,76,0.2)", // magenta
 	            strokeColor: "rgba(153,0,76,1)", // magenta
 	            pointColor: "rgba(153,0,76,1)", // magenta
@@ -60,7 +58,6 @@ var data = {
 	    ]
 	};
       var option = {
-
       //animationSteps: 60
       scales: {
              yAxes: [{
@@ -76,118 +73,71 @@ var data = {
     var ctx = document.getElementById('myChart').getContext('2d');
     var myNewChart = new Chart(ctx).Line(data,option);
 
-Chart.defaults.global.animation
 
 
-
+// crete varibale for changing data point in graph
 var indexEnd = xT.length;
 
-
-
-
-
-			//document.getElementById("status").innerHTML = return_data;
-    //  document.getElementById("header").innerHTML = "cas  \u00A0 \u00A0 \u00A0 \u00A0  poz x  \u00A0 \u00A0 \u00A0 \u00A0   \u00A0 \u00A0 \u00A0 \u00A0        poz  y ";
-
-  //**********************************************************************************************************itt iratom ki a tomboket
-  //*****************************************************************
-/*
-  var vT = '<table border="1"><tr>';
-  for( i=0;i<phpdata[0].length;i++ )
-  { vT += '<td>'+phpdata[0][i]+'<\/td>'; }
-  vT += '<\/tr><tr>';
-  for( i=0;i<phpdata[1].length;i++ )
-  { vT += '<td>'+phpdata[1][i]+'<\/td>'; }
-  vT += '<\/tr><tr>';
-  for( i=0;i<phpdata[2].length;i++ )
-  { vT += '<td>'+phpdata[2][i]+'<\/td>'; }
-  vT += '<\/tr><\/table>';
-
-*/
-
-
-
-
-
-//------------------------------------------animacio start
+//------------------------------------------animation start
 function myMove(params1, params2) {
-//  function myMove() {
   var elem = document.getElementById("myAnimation");
   var pos = 0;
   var i = 0;
   var temp = Math.max.apply(null,params2);
-  console.log(temp);
-console.log("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa");
   var id = setInterval(frame, 20);
   function frame() {
-
     if (pos == 350) {
           clearInterval(id);
-      console.log("bbbbbbb");
     } else {
-
       pos++;
       i++;
       elem.style.top = (temp-params2[i]) + 'px';
-        console.log(xT[i]);
       elem.style.left = params1[i] + 'px';
-          console.log("ccccccc");
     }
   }
 }
 
 
-//------------------------------------------animacio end
+//------------------------------------------animation end
 
-
-/////////**********************************
+// create table for t,x,y
 var energy = phpdata.join();
-
 var akt = 0;
 var sor = phpdata[0].length;
 var oszlop = phpdata.length;
 var vT = '<table border="1"><tr><th>cas<\/th><th>pos x<\/th><th>pos y<\/th><\/tr>';
-for( i=0;i<sor;i++ ) // i sor
+for( i=0;i<sor;i++ ) // i riadok
 {
 vT += '<tr>';
-for( k=0;k<oszlop;k++ ) // k oszlop
+for( k=0;k<oszlop;k++ ) // k stlpec
 {
     vT += '<td>'+phpdata[k][i]+'<\/td>';
 }
 vT += '<\/tr>';
 }
 vT += '<\/tr><\/table>';
+//  end the creating table
 
+// call functions
+document.getElementById("myAnimation").innerHTML = myMove(xT,yT);
+document.getElementById("zobrazT").innerHTML = vT;
+//document.getElementById("zobrazX").innerHTML = xT;
+//document.getElementById("zobrazY").innerHTML = yT;
 
-  //99999999999999999999999999999999999999999999999999999999999999
+// changing data point in the graph
+    for(var indexP = 0 ; indexP <= indexEnd; indexP+=2)
+    {
+    myNewChart.datasets[0].points[indexP].fillColor=  "#0000FF";
+    }
 
-
-  document.getElementById("myAnimation").innerHTML = myMove(xT,yT);
-
-    document.getElementById("zobrazT").innerHTML = vT;
-
-  //  document.getElementById("zobrazX").innerHTML = xT;
- //    document.getElementById("zobrazY").innerHTML = yT;
-
-
-
-      for(var indexP = 0 ; indexP <= indexEnd; indexP+=2){
-      myNewChart.datasets[0].points[indexP].fillColor=  "#0000FF";
-      //myNewChart.update();
-
-      }
-
-  //    document.getElementById("myChart").innerHTML = ;
-    //  document.getElementById("zobrazY").innerHTML = yT.join('<br/>');
 	    }
     }
     // Send the data to PHP now... and wait for response to update the status div
     hr.send(vars); // Actually execute the request
   //  document.getElementById("status").innerHTML = "processing...";
-
 }
-//------------------------------------------------------------------------------------------------------
 </script>
+
 </head>
 <body>
 <h2>Projectile Motion</h2>
@@ -195,22 +145,16 @@ Velocity: <input id="Velocity" name="Velocity" type="text">  <br><br>
 Angle: <input id="Angle" name="Angle" type="text"> <br><br>
 <input name="myBtn" type="submit" value="Submit Data" onclick="ajax_post();"> <br><br>
 
-<div id="status"></div>
-<div id="header"></div>
+  <!-- <div id ="myContainer"></div>  -->
+  <div id ="myAnimation"></div>
+</br>
+  <canvas id="myChart" height="400" width="1000"></canvas>
 
-
-
-
-
-
-<div id="zobrazT"></div>
-<div id="zobrazX"></div>
-<div id="zobrazY"></div>
-<canvas id="myChart" height="400" width="1000"></canvas>
-<div id ="myContainer"></div>
-<div id ="myAnimation"></div>
-
-
+  <div id="status"></div>
+  <div id="header"></div>
+  <div id="zobrazT"></div>
+  <div id="zobrazX"></div>
+  <div id="zobrazY"></div>
 
 </body>
 </html>
